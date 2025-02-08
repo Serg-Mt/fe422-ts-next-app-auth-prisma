@@ -6,7 +6,7 @@ export default function App({
 }) {
   return <>
     <Header />
-    <h1>Page Router</h1>
+    <h1>🦖Page Router</h1>
     <SessionProvider session={session}>
       <main>
         <Component {...pageProps} />
