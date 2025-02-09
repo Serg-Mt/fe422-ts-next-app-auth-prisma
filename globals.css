@@ -1,7 +1,11 @@
 header {
   display: flex;
+  gap: 1rem;
   nav ul{
-    /* display: flex; */
+    margin: 0;
+    gap: .5rem;
+    display: flex;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     list-style: none;
   }

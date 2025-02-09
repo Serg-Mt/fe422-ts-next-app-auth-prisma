@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const pages = [
   { href: '/', title: 'Home' },
-  { href: '/pages-router', title: 'Page router' },
+  // { href: '/pages-router', title: 'Page router' },
   // { href: '/custom', title: 'Custom page' },
   { href: '/group-list', title: 'Group List (app)' },
   { href: '/pages-router/group-list', title: 'Group List (pages)' },

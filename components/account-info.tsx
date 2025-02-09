@@ -3,18 +3,22 @@
 
 import { Session } from 'next-auth';
 import { FunctionComponent } from 'react';
+import css from './account.module.css'
 
 
 export function AccountInfo({ session, SignInButton, SignOutButton }: { session: Session | null, SignInButton: FunctionComponent, SignOutButton: FunctionComponent }) {
   if (session?.user)
-    return <>
-      Signed in as {session.user?.name} ({session.user?.email}) <br />
-      {session.user?.image && <img src={session.user?.image} style={{ width: '50px', borderRadius: '50%' }} />}<br />
+    return <div>
+      Signed in as {session.user?.name} ({session.user?.email})
+      <br />
+      {session.user?.image
+        && <img src={session.user?.image} className={css.avatar} />}
+      <br />
       <SignOutButton />
-    </>;
-  return <>
+    </div>;
+  return <div>
     Not signed in <SignInButton />
-  </>
+  </div>
 
 }
 
