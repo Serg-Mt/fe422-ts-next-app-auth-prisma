@@ -3,12 +3,12 @@ import { AccountInfo } from './account-info';
 
 export async function ServerComponentAccountButton() {
   const session = await auth();
-  return <AccountInfo session={session} SignInButton={SignInButton} SignOutButton={SignOutButton} />
+  return <AccountInfo session={session} SignInButton={SignInForm} SignOutButton={SignOutForm} />
 }
 
 
 
-export function SignInButton() {
+export function SignInForm() {
   return <form
     action={async () => {
       "use server"
@@ -20,7 +20,7 @@ export function SignInButton() {
 
 }
 
-export function SignOutButton() {
+export function SignOutForm() {
   return <form
     action={async () => {
       "use server"

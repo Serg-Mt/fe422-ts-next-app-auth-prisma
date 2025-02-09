@@ -14,8 +14,9 @@ async function createGroups() {
   });
 }
 
+
 async function createStudents() {
-  const data: Student[] = [
+  const data = [
     { id: 1, name: 'Сергей', surname: 'Петров', age: 25, groupId: null },
     { id: 2, name: 'Иван', surname: '', age: 25, groupId: 2 },
     { id: 3, name: 'Петр', surname: '', age: 25, groupId: 1 },

@@ -7,14 +7,14 @@ import type { AppProps } from 'next/app'
 export default function App({
   Component,
   pageProps: { session, ...pageProps },
-}:AppProps) {
+}: AppProps) {
   return <>
-   <SessionProvider session={session}>
-    <Header>
-      <ClientComponentAccountButton/>
-    </Header>
-    <h1>🦖Page Router</h1>
-   
+    <SessionProvider session={session}>
+      <Header>
+        <ClientComponentAccountButton />
+      </Header>
+      <h1>🦖Page Router</h1>
+
       <main>
         <Component {...pageProps} />
       </main>

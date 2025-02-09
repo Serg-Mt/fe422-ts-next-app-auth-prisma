@@ -2,6 +2,7 @@ import { signIn, signOut, useSession } from 'next-auth/react';
 import { AccountInfo } from './account-info';
 
 
+
 export function ClientComponentAccountButton() {
   const { data: session } = useSession();
   return <AccountInfo

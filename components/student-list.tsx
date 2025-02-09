@@ -1,6 +1,8 @@
-import type { Student } from '@prisma/client'
+import { StudentAPIRecord } from '@/app/api/student/route'
 
-export function StudentsList({ students }: { students: Student[] }) {
+
+
+export function StudentsList({ students }: { students: StudentAPIRecord[] }) {
   return <table>
     <thead>
       <tr>
@@ -11,11 +13,11 @@ export function StudentsList({ students }: { students: Student[] }) {
       </tr>
     </thead>
     <tbody>
-      {students.map(({ id, name, surname, age, groupId }) => <tr key={id}>
+      {students.map(({ id, name, surname, age, group }) => <tr key={id}>
         <td>{name}</td>
         <td>{surname}</td>
         <td>{age}</td>
-        <td>{groupId}</td>
+        <td>{group?.name}</td>
       </tr>)}
     </tbody>
   </table>
