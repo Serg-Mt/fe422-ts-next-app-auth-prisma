@@ -9,7 +9,7 @@ import Google from "next-auth/providers/google"
 import Vk from "next-auth/providers/vk"
 
 const prismaDB = new PrismaClient();
-
+const apiVersion = "5.126"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -17,7 +17,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     GitHub,
     Google,
-    Vk({ clientId: process.env.AUTH_VK_ID, clientSecret: process.env.AUTH_VK_SECRET,checks:[] }),
+    Vk({
+       clientId: process.env.AUTH_VK_ID, 
+       clientSecret: process.env.AUTH_VK_SECRET,
+       checks:[],
+       accessTokenUrl: `https://oauth.vk.com/access_token?v=${apiVersion}`,
+       requestTokenUrl: `https://oauth.vk.com/access_token?v=${apiVersion}`,
+       authorizationUrl: `https://oauth.vk.com/authorize?response_type=code&v=${apiVersion}`,
+       profileUrl: `https://api.vk.com/method/users.get?fields=photo_100&v=${apiVersion}`,
+      }),
 
     CredentialsProvider({
       // The name to display on the sign in form (e.g. 'Sign in with...')
