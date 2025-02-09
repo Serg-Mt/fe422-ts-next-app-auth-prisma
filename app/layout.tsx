@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
-import "./globals.css";
+import "@/globals.css";
 import { Header } from '@/components/header';
+import { ServerComponentAccountButton } from '@/components/account-button-rsc';
 
 
 
@@ -17,7 +18,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={``}>
-        <Header />
+        <Header>
+          <ServerComponentAccountButton />
+        </Header>
         <main>
           <h1>⚡App Router</h1>
           {children}
