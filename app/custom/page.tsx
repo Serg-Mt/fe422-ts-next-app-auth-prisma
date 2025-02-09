@@ -1,11 +1,11 @@
 // import { signIn, signOut, auth } from "@/auth"
 
-// export default function Page1() {
-//   return <>
-//     <h2>Custom page </h2>;
-//     <Account />
-//   </>
-// }
+export default function Page1() {
+  return <>
+    <h2>Custom page </h2>;
+    {/* <Account /> */}
+  </>
+}
 
 // async function Account() {
 //   const session = await auth();

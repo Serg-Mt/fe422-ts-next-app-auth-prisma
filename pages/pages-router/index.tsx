@@ -1,12 +1,12 @@
 // import { signIn, signOut, useSession } from 'next-auth/react';
 
 
-// export default function Page() {
-//   return <>
-//     <h2>Custom page-router page </h2>
-//     <Account />
-//   </>;
-// }
+export default function Page() {
+  return <>
+    <h2>Custom page-router page </h2>
+    {/* <Account /> */}
+  </>;
+}
 
 // function Account() {
 //   const { data: session } = useSession();
