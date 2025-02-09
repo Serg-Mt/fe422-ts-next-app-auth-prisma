@@ -1,5 +1,5 @@
 import { auth } from '@/auth';
-import { MyAccount, ServerSession } from '@/components/my-account';
+import { /* MyAccount, */ ServerSession } from '@/components/my-account';
 
 export default async function Page() {
   const
