@@ -20,7 +20,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     Vk({
        clientId: process.env.AUTH_VK_ID, 
        clientSecret: process.env.AUTH_VK_SECRET,
-       checks:[],       
       }),
 
     CredentialsProvider({
