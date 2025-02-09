@@ -17,7 +17,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     GitHub,
     Google,
-    Vk({checks:['none']}),
+    Vk({ clientId: process.env.AUTH_VK_ID, clientSecret: process.env.AUTH_VK_SECRET }),
 
     CredentialsProvider({
       // The name to display on the sign in form (e.g. 'Sign in with...')
