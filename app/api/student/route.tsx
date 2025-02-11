@@ -8,7 +8,7 @@ import { /* type NextRequest, */ NextResponse } from 'next/server'
 
 
 const
-  findManyArg = { include: { group: { select: { name: true } } } };
+  findManyArg = { include: { house: { select: { name: true } } } };
 export type StudentAPIRecord = Prisma.StudentGetPayload<typeof findManyArg>
 
 // общедоступное API

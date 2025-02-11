@@ -9,15 +9,15 @@ export function StudentsList({ students }: { students: StudentAPIRecord[] }) {
         <td>name</td>
         <td>surname</td>
         <td>age</td>
-        <td>group</td>
+        <td>house</td>
       </tr>
     </thead>
     <tbody>
-      {students.map(({ id, name, surname, age, group }) => <tr key={id}>
+      {students.map(({ id, name, surname, age, house }) => <tr key={id}>
         <td>{name}</td>
         <td>{surname}</td>
         <td>{age}</td>
-        <td>{group?.name}</td>
+        <td>{house?.name}</td>
       </tr>)}
     </tbody>
   </table>
