@@ -9,7 +9,6 @@ import Google from "next-auth/providers/google"
 import Vk from "next-auth/providers/vk"
 
 const prismaDB = new PrismaClient();
-const apiVersion = "5.126"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),

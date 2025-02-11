@@ -10,78 +10,97 @@ async function createUsers() {
   });
 }
 
+async function createHouses() {
+  const gryffindor = await prisma.house.upsert({
+    where: { id: 1 },
+    create: { name: 'Gryffindor', id: 1 },
+    update: { name: 'Gryffindor' }
+  });
+  const hufflepuff = await prisma.house.upsert({
+    where: { id: 2 },
+    create: { name: 'Hufflepuff', id: 2 },
+    update: { name: 'Hufflepuff' }
+  });
+  const ravenclaw = await prisma.house.upsert({
+    where: { id: 3 },
+    create: { name: 'Ravenclaw', id: 3 },
+    update: { name: 'Ravenclaw' }
+  });
+  const slytherin = await prisma.house.upsert({
+    where: { id: 4 },
+    create: { name: 'Slytherin', id: 4 },
+    update: { name: 'Slytherin' },
+  });
+  return { gryffindor, hufflepuff, ravenclaw, slytherin };
+}
+
+async function createSubjects() {
+  return await prisma.subject.createMany({
+    data: [
+      { name: 'Transfiguration' },
+      { name: 'Charms' },
+      { name: 'Potions' },
+      { name: 'History of Magic' },
+      { name: 'Defence Against the Dark Arts' },
+      { name: 'Astronomy' },
+      { name: 'Herbology' },
+      { name: 'Arithmancy' },
+      { name: 'Ancient Runes' },
+      { name: 'Divination' },
+      { name: 'Care of Magical Creatures' },
+      { name: 'Muggle Studies' },
+    ],
+  });
+}
+
+async function createTeachers() {
+  return await prisma.teacher.createMany({
+    data: [
+      { name: 'Minerva', surname: 'McGonagall', id: 1 }, // Transfiguration
+      { name: 'Filius', surname: 'Flitwick', id: 2 }, // Charms
+      { name: 'Severus', surname: 'Snape', id: 3 }, // Potions
+      { name: 'Bathilda', surname: 'Bagshot', id: 4 }, // History of Magic
+      { name: 'Remus', surname: 'Lupin', id: 5 }, // Defence Against the Dark Arts
+      { name: 'Aurora', surname: 'Sinistra', id: 6 }, // Astronomy
+      { name: 'Pomona', surname: 'Sprout', id: 7 }, // Herbology
+      { name: 'Septima', surname: 'Vector', id: 8 }, // Arithmancy
+      { name: 'Bathsheba', surname: 'Babbling', id: 9 }, // Ancient Runes
+      { name: 'Sybill', surname: 'Trelawney', id: 10 }, // Divination
+      { name: 'Rubeus', surname: 'Hagrid', id: 11 }, // Care of Magical Creatures
+      { name: 'Alecto', surname: 'Carrow', id: 12 }, // Muggle Studies
+    ],
+  });
+}
+
+async function createStudents(gryffindor: { id: number; name: string; }, slytherin: { id: number; name: string; }, ravenclaw: { id: number; name: string; }, hufflepuff: { id: number; name: string; }) {
+  return await prisma.student.createMany({
+    data: [
+      { name: 'Harry', surname: 'Potter', age: 17, houseId: gryffindor.id },
+      { name: 'Hermione', surname: 'Granger', age: 17, houseId: gryffindor.id },
+      { name: 'Ron', surname: 'Weasley', age: 17, houseId: gryffindor.id },
+      { name: 'Draco', surname: 'Malfoy', age: 17, houseId: slytherin.id },
+      { name: 'Luna', surname: 'Lovegood', age: 16, houseId: ravenclaw.id },
+      { name: 'Neville', surname: 'Longbottom', age: 17, houseId: gryffindor.id },
+      { name: 'Ginny', surname: 'Weasley', age: 16, houseId: gryffindor.id },
+      { name: 'Cho', surname: 'Chang', age: 17, houseId: ravenclaw.id },
+      { name: 'Cedric', surname: 'Diggory', age: 17, houseId: hufflepuff.id },
+      { name: 'Pansy', surname: 'Parkinson', age: 17, houseId: slytherin.id },
+      { name: 'Dean', surname: 'Thomas', age: 17, houseId: gryffindor.id },
+      { name: 'Seamus', surname: 'Finnigan', age: 17, houseId: gryffindor.id },
+    ],
+  });
+}
+
 async function main() {
   try {
     await prisma.$connect();
-    await createUsers();
+    // await createUsers();
+    const { gryffindor, hufflepuff, ravenclaw, slytherin } = await createHouses();
+    await createTeachers();
 
-    // Create Hogwarts houses
-    const gryffindor = await prisma.house.create({
-      data: { name: 'Gryffindor' },
-    });
-    const hufflepuff = await prisma.house.create({
-      data: { name: 'Hufflepuff' },
-    });
-    const ravenclaw = await prisma.house.create({
-      data: { name: 'Ravenclaw' },
-    });
-    const slytherin = await prisma.house.create({
-      data: { name: 'Slytherin' },
-    });
-
-    // Create Hogwarts subjects
-    const subjects = await prisma.subject.createMany({
-      data: [
-        { name: 'Transfiguration' },
-        { name: 'Charms' },
-        { name: 'Potions' },
-        { name: 'History of Magic' },
-        { name: 'Defence Against the Dark Arts' },
-        { name: 'Astronomy' },
-        { name: 'Herbology' },
-        { name: 'Arithmancy' },
-        { name: 'Ancient Runes' },
-        { name: 'Divination' },
-        { name: 'Care of Magical Creatures' },
-        { name: 'Muggle Studies' },
-      ],
-    });
-
-    // Create Hogwarts teachers
-    const teachers = await prisma.teacher.createMany({
-      data: [
-        { name: 'Minerva', surname: 'McGonagall', userId: '1' }, // Transfiguration
-        { name: 'Filius', surname: 'Flitwick', userId: '2' }, // Charms
-        { name: 'Severus', surname: 'Snape', userId: '3' }, // Potions
-        { name: 'Bathilda', surname: 'Bagshot', userId: '4' }, // History of Magic
-        { name: 'Remus', surname: 'Lupin', userId: '5' }, // Defence Against the Dark Arts
-        { name: 'Aurora', surname: 'Sinistra', userId: '6' }, // Astronomy
-        { name: 'Pomona', surname: 'Sprout', userId: '7' }, // Herbology
-        { name: 'Septima', surname: 'Vector', userId: '8' }, // Arithmancy
-        { name: 'Bathsheba', surname: 'Babbling', userId: '9' }, // Ancient Runes
-        { name: 'Sybill', surname: 'Trelawney', userId: '10' }, // Divination
-        { name: 'Rubeus', surname: 'Hagrid', userId: '11' }, // Care of Magical Creatures
-        { name: 'Alecto', surname: 'Carrow', userId: '12' }, // Muggle Studies
-      ],
-    });
 
     // Create students and assign them to houses
-    const students = await prisma.student.createMany({
-      data: [
-        { name: 'Harry', surname: 'Potter', age: 17, houseId: gryffindor.id },
-        { name: 'Hermione', surname: 'Granger', age: 17, houseId: gryffindor.id },
-        { name: 'Ron', surname: 'Weasley', age: 17, houseId: gryffindor.id },
-        { name: 'Draco', surname: 'Malfoy', age: 17, houseId: slytherin.id },
-        { name: 'Luna', surname: 'Lovegood', age: 16, houseId: ravenclaw.id },
-        { name: 'Neville', surname: 'Longbottom', age: 17, houseId: gryffindor.id },
-        { name: 'Ginny', surname: 'Weasley', age: 16, houseId: gryffindor.id },
-        { name: 'Cho', surname: 'Chang', age: 17, houseId: ravenclaw.id },
-        { name: 'Cedric', surname: 'Diggory', age: 17, houseId: hufflepuff.id },
-        { name: 'Pansy', surname: 'Parkinson', age: 17, houseId: slytherin.id },
-        { name: 'Dean', surname: 'Thomas', age: 17, houseId: gryffindor.id },
-        { name: 'Seamus', surname: 'Finnigan', age: 17, houseId: gryffindor.id },
-      ],
-    });
+    await createStudents(gryffindor, slytherin, ravenclaw, hufflepuff);
 
     // Assign students to subjects
     const studentSubjects = [
@@ -176,3 +195,5 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
+
+
