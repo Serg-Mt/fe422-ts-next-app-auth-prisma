@@ -1,7 +1,11 @@
 {
   "cSpell.words": [
     "autoincrement",
-    "myaccount"
+    "Gryffindor",
+    "Hufflepuff",
+    "myaccount",
+    "Ravenclaw",
+    "Slytherin"
   ],
   "typescript.tsdk": "node_modules\\typescript\\lib"
 }

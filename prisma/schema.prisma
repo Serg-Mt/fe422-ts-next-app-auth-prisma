@@ -13,22 +13,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Group {
-  id       Int       @id @default(autoincrement())
-  name     String
-  students Student[]
-}
-
 model Student {
   id      Int     @id @default(autoincrement())
   name    String
   surname String
   age     Int
-  group   Group?  @relation(fields: [groupId], references: [id])
-  groupId Int?
   user    User?   @relation(fields: [userId], references: [id])
   userId  String?
   Grade   Grade[]
+  house   House?  @relation(fields: [houseId], references: [id])
+  houseId Int?
 }
 
 model Teacher {
@@ -48,6 +42,12 @@ model Grade {
   teacherId Int
   studentId Int
   date      DateTime @default(now())
+}
+
+model House {
+  id       Int       @id @default(autoincrement())
+  name     String
+  students Student[]
 }
 
 // --------------------------------------------------------
