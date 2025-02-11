@@ -1,13 +1,13 @@
-import { GroupList } from '@/components/group-list';
+import { HouseList } from '@/components/house-list';
 import { prisma } from '@/prisma/prisma';
 
 
 export default async function Page() {
   const
     // responce = await fetch('http://localhost:3000/api/group/'),
-    groups = await prisma.group.findMany();
+    houses = await prisma.house.findMany();
 
   return <> RSC
-    <GroupList groups={groups} />
+    <HouseList houses={houses} />
   </>
 }

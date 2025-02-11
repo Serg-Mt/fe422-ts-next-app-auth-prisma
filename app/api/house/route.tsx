@@ -9,6 +9,6 @@ export async function GET(/* request: NextRequest */) {
   
 
   return NextResponse.json(
-    await prisma.group.findMany()
+    await prisma.house.findMany()
   );
 }
