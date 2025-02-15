@@ -42,10 +42,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         console.log('credentials', credentials);
         // Return null if user data could not be retrieved
 
+        // так не надо делать просто для проверки функционала API
         if ('1' === credentials?.username && '1' === credentials.password) {
           const user = await prismaDB.user.findFirst({ where: { id: '1' } });
           console.log('authorize user=', user);
           return user;
+        }
+        switch (credentials.username) {
+          case 'admin':
+            if ('1' === credentials.password) {
+              const user = await prismaDB.user.findFirst({ where: { id: '2' } });
+              return user;
+            }
         }
         return null;
       }

@@ -4,9 +4,6 @@ import type { Prisma } from '@prisma/client';
 
 import { /* type NextRequest, */ NextResponse } from 'next/server'
 
-
-
-
 const
   findManyArg = { include: { house: { select: { name: true } } } };
 export type StudentAPIRecord = Prisma.StudentGetPayload<typeof findManyArg>

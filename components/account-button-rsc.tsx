@@ -6,8 +6,6 @@ export async function ServerComponentAccountButton() {
   return <AccountInfo session={session} SignInButton={SignInForm} SignOutButton={SignOutForm} />
 }
 
-
-
 export function SignInForm() {
   return <form
     action={async () => {
@@ -17,7 +15,6 @@ export function SignInForm() {
   >
     <button type="submit">Sign in</button>
   </form>
-
 }
 
 export function SignOutForm() {
@@ -29,5 +26,4 @@ export function SignOutForm() {
   >
     <button type="submit">Sign Out</button>
   </form>
-
 }
