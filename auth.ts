@@ -9,6 +9,8 @@ import Google from "next-auth/providers/google"
 import Vk from "next-auth/providers/vk"
 import MailRu from "next-auth/providers/mailru"
 import Yandex from "next-auth/providers/yandex"
+import Discord from "next-auth/providers/discord"
+import MailChimp from "next-auth/providers/mailchimp"
 
 const prismaDB = new PrismaClient();
 
@@ -21,6 +23,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     Vk,
     MailRu,
     Yandex,
+    Discord,
+    MailChimp,
     CredentialsProvider({
       // The name to display on the sign in form (e.g. 'Sign in with...')
       name: 'Credentials',
