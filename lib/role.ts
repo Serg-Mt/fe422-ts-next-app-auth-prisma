@@ -6,7 +6,7 @@ const
 
 export type Role = typeof roles[number] | null;
 
-export async function getRole(session: Session | null): Role {
+export async function getRole(session: Session | null): Promise<Role> {
   if ('admin' === session?.user?.role)
     return "admin";
   const
@@ -16,4 +16,5 @@ export async function getRole(session: Session | null): Role {
     return "student";
   if (await prisma.teacher.findFirst({ where: { userId } }))
     return "teacher";
+  return null;
 }

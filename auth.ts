@@ -54,11 +54,40 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
               const user = await prismaDB.user.findFirst({ where: { id: '2' } });
               return user;
             }
+          case 'g':
+            if ('1' === credentials.password) {
+              const user = await prismaDB.user.findFirst({ where: { id: '3' } });
+              return user;
+            }
+          case 's':
+            if ('1' === credentials.password) {
+              const user = await prismaDB.user.findFirst({ where: { id: '4' } });
+              return user;
+            }
+            return null;
         }
-        return null;
       }
     })
 
   ],
-})
+  callbacks: {
+    jwt({ token, user }) {
+      // if (user) token.role = user.role
+      // console.log('____jwt', { token, user });
+      if (user) {
+        token.id = user?.id;
+        token.role = user?.role;
+      }
+      return token
+    },
+    session({ session, token }) {
+      // console.log('____session', { session, token });
+      if (session.user) {
+        session.user.id = token?.id;
+        session.user.role = token?.role;
+      }
+      return session;
+    }
+  }
+});
 

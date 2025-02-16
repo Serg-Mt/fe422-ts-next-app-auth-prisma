@@ -9,6 +9,7 @@ const pages = [
   { href: '/pages-router/student-list', title: 'Student List (pages)' },
   { href: '/account', title: 'My account (app)' },
   { href: '/pages-router/account', title: 'My account (pages)' },
+  { href: '/grades', title: 'Grades' }
 ];
 
 export function Navigation() {

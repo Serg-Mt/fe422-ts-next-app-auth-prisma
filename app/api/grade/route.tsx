@@ -11,8 +11,9 @@ export async function GET(/* request: NextRequest */) {
 
   const
     session = await auth(),
-    role = getRole(session),
+    role = await getRole(session),
     userId = session?.user?.id;
+  console.log({ role, userId, user: session?.user });
   switch (role) {
     case "admin":  // проверим роль если админ то вернем все
       return NextResponse.json(
