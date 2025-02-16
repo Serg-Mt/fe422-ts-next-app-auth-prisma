@@ -41,19 +41,21 @@ export async function GET(/* request: NextRequest */) {
 export async function POST(request: NextRequest) {
   const
     session = await auth(),
-    role = getRole(session),
+    role = await getRole(session),
     userId = session?.user?.id;
+    console.log('POST API grade',{ role, userId, user: session?.user });
+    console.log('request=', request);
   switch (role) {
     case "teacher":
       const
         teacherId = (await prisma.teacher.findFirst({ where: { userId } }))?.id,
-        { studentId, value } = await request.json();
+        { studentId, point } = await request.json();
       return NextResponse.json(
         await prisma.grade.create({
           data: {
             teacherId,
-            studentId,
-            value
+            studentId:+studentId,
+            point:+point
           }
         })
       );
@@ -61,6 +63,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 }
+
 export async function DELETE(request: NextRequest) {
   const
     session = await auth(),

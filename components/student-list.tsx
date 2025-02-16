@@ -6,6 +6,7 @@ export function StudentsList({ students }: { students: StudentAPIRecord[] }) {
   return <table>
     <thead>
       <tr>
+        <td>id</td>
         <td>name</td>
         <td>surname</td>
         <td>age</td>
@@ -14,6 +15,7 @@ export function StudentsList({ students }: { students: StudentAPIRecord[] }) {
     </thead>
     <tbody>
       {students.map(({ id, name, surname, age, house }) => <tr key={id}>
+        <th>{id}</th>
         <td>{name}</td>
         <td>{surname}</td>
         <td>{age}</td>
